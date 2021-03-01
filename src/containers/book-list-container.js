@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import WithBookstoreService from "../components/hoc/with-bookstore-service";
 import { fetchBooks } from "../actions";
 import { compose } from "../utils";
@@ -28,9 +29,9 @@ const mapStateToProps = ({ bookList: { books, loading, error } }) => {
 };
 
 const mapDispatchToProps = (dispatch, { bookstoreService }) => {
-  return {
-    fetchBooks: fetchBooks(bookstoreService, dispatch),
-  };
+  return bindActionCreators({
+    fetchBooks: fetchBooks(bookstoreService),
+  }, dispatch);
 };
 
 export default compose(
