@@ -14,6 +14,7 @@ const ShoppingCartTable = ({
   onDecrease,
   onDelete,
 }) => {
+  
   const renderRow = (item, idx) => {
     const { id, title, count, total } = item;
     return (

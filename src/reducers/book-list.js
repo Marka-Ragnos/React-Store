@@ -3,7 +3,7 @@ const updateBookList = (state, action) => {
     return {
       books: [],
       loading: true,
-      errror: null,
+      error: null,
     };
   }
   switch (action.type) {
@@ -11,13 +11,13 @@ const updateBookList = (state, action) => {
       return {
         books: [],
         loading: true,
-        errror: null,
+        error: null,
       };
     case "FETCH_BOOKS_SUCCESS":
       return {
         books: action.payload,
         loading: false,
-        errror: null,
+        error: null,
       };
     case "FETCH_BOOKS_FAILURE":
       return {

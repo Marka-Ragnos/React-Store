@@ -1,3 +1,23 @@
+const calculateNumItems = (cartItems) => {
+  let sum;
+  if (cartItems.length === 0) {
+    sum = 0;
+  } else {
+    sum = cartItems.map((a) => a.count).reduce((a, b) => a + b);
+  }
+  return sum;
+};
+
+const updateTotal = (cartItems) => {
+  let sum;
+  if (cartItems.length === 0) {
+    sum = 0;
+  } else {
+    sum = cartItems.map((a) => a.total).reduce((a, b) => a + b);
+  }
+  return sum;
+};
+
 const updateCartItems = (cartItems, item, idx) => {
   if (item.count === 0) {
     return [...cartItems.slice(0, idx), ...cartItems.slice(idx + 1)];
@@ -28,14 +48,16 @@ const updateOrder = (state, bookId, quantity) => {
   const item = cartItems[itemIndex];
   const newItem = updateCartItem(book, item, quantity);
   return {
-    orderTotal: 0,
+    numItems: calculateNumItems(updateCartItems(cartItems, newItem, itemIndex)),
     cartItems: updateCartItems(cartItems, newItem, itemIndex),
+    orderTotal: updateTotal(updateCartItems(cartItems, newItem, itemIndex)),
   };
 };
 
 const updateShoppingCart = (state, action) => {
   if (state === undefined) {
     return {
+      numItems: 0,
       cartItems: [],
       orderTotal: 0,
     };
